@@ -41,3 +41,5 @@ passwd -l root
 echo '%wheel  ALL=(ALL)       ALL' > /etc/sudoers.d/99_deck_pw_sudo
 sed -iE '/^ALL   ALL=(ALL) ALL/d' /etc/sudoers
 sed -iE '/^Defaults targetpw/d' /etc/sudoers
+
+systemctl enable NetworkManager

@@ -69,8 +69,6 @@
 		<source path='http://download.opensuse.org/update/tumbleweed/'/>
 	</repository>
 	<packages type="image">
-		<package name="dracut-kiwi-oem-dump"/>
-		<package name="dracut-kiwi-oem-repart"/>
 		<package name="live-add-yast-repos"/>
 		<package name="patterns-base-bootloader"/>
 		<package name="patterns-microos-basesystem"/>
@@ -81,8 +79,17 @@
 		<package name="patterns-microos-desktop-kde"/>
 		<package name="patterns-microos-hardware"/>
 		<package name="kernel-default"/>
+		<package name="kernel-firmware-all"/>
 		<package name="device-mapper"/>
 		<package name="cryptsetup"/>
+		<package name="growpart-generator"/>
+		<package name="parted"/>
+		<package name="dracut-kiwi-oem-dump"/>
+		<package name="dracut-kiwi-oem-repart"/>
+		<package name="NetworkManager-wwan"/>
+		<package name="NetworkManager-tui"/>
+		<package name="NetworkManager-pptp"/>
+		<package name="NetworkManager-bluetooth"/>
 	</packages>
     <packages type="bootstrap">
 		<package name="coreutils"/>
