@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<image schemaversion="7.2" name="openSUSE-MicroOS-deck" displayname="openSUSE MicroOS for Steam Deck">
+	<description type="system">
+		<author>Katharine Chui</author>
+		<contact>kwchuiaa@connect.ust.hk</contact>
+		<specification>openSUSE MicroOS for Steam Deck</specification>
+	</description>
+	<preferences arch="x86_64">
+		<version>0.0.1</version>
+		<packagemanager>zypper</packagemanager>
+		<type 
+			image="oem"
+			filesystem="btrfs"
+			firmware="uefi"
+			fsmountoptions="compress-force=zstd:3"
+			installiso="true"
+			bootpartition="false"
+			devicepersistency="by-uuid"
+			btrfs_root_is_snapshot="true"
+			btrfs_root_is_readonly_snapshot="true"
+		>
+			<bootloader
+				name="grub2"
+				timeout="3"
+			/>
+			<systemdisk>
+				<volume name="home"/>
+				<volume name="root"/>
+				<volume name="opt"/>
+				<volume name="srv"/>
+				<volume name="boot/grub2/i386-pc"/>
+				<volume name="boot/grub2/x86_64-efi" mountpoint="boot/grub2/x86_64-efi"/>
+				<volume name="boot/writable"/>
+				<volume name="usr/local"/>
+				<volume name="var" copy_on_write="false"/>
+			</systemdisk>
+		</type>
+	</preferences>
+	<users>
+		<user
+			name="root"
+			groups="root"
+			home="/root"
+			password="deck"
+			pwdformat="plain"
+			realname="root"
+			shell="/usr/bin/bash"
+		/>
+		<user
+			name="deck"
+			groups="deck,_deck,wheel"
+			home="/home/deck"
+			password="deck"
+			pwdformat="plain"
+			realname="Steam Deck User"
+			shell="/usr/bin/bash"
+		/>
+	</users>
+	<repository imageinclude="true" alias="oss">
+		<source path='http://download.opensuse.org/tumbleweed/repo/oss/'/>
+	</repository>
+	<repository imageinclude="true" alias="non-oss">
+		<source path='http://download.opensuse.org/tumbleweed/repo/non-oss/'/>
+	</repository>
+	<repository imageinclude="true" alias="openh264">
+		<source path='http://codecs.opensuse.org/openh264/openSUSE_Tumbleweed'/>
+	</repository>
+	<repository imageinclude="true" alias="update">
+		<source path='http://download.opensuse.org/update/tumbleweed/'/>
+	</repository>
+	<packages type="image">
+		<package name="dracut-kiwi-oem-dump"/>
+		<package name="dracut-kiwi-oem-repart"/>
+		<package name="live-add-yast-repos"/>
+		<package name="patterns-base-bootloader"/>
+		<package name="patterns-microos-basesystem"/>
+		<package name="patterns-microos-base-zypper"/>
+		<package name="patterns-microos-defaults"/>
+		<package name="patterns-microos-apparmor"/>
+		<package name="patterns-microos-desktop-common"/>
+		<package name="patterns-microos-desktop-kde"/>
+		<package name="patterns-microos-hardware"/>
+		<package name="kernel-default"/>
+		<package name="device-mapper"/>
+		<package name="cryptsetup"/>
+	</packages>
+    <packages type="bootstrap">
+		<package name="coreutils"/>
+		<package name="gawk"/>
+		<package name="gzip"/>
+		<package name="hostname"/>
+		<package name="openssl"/>
+		<package name="filesystem"/>
+		<package name="glibc-locale-base"/>
+		<package name="ca-certificates-mozilla"/>
+		<package name="MicroOS-release-dvd"/>
+    </packages>
+</image>
