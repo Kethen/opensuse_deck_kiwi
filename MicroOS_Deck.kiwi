@@ -33,6 +33,7 @@
 				<volume name="boot/writable"/>
 				<volume name="usr/local"/>
 				<volume name="var" copy_on_write="false"/>
+				<volume name="etc"/>
 			</systemdisk>
 		</type>
 	</preferences>
