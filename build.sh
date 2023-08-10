@@ -24,6 +24,5 @@ then
 fi
 
 kiwi-ng system create --root=./tmp_mnt/kiwi_root_dir --target-dir=./image_out
-
 umount tmp_mnt
 '

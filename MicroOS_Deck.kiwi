@@ -18,6 +18,7 @@
 			devicepersistency="by-uuid"
 			btrfs_root_is_snapshot="true"
 			btrfs_root_is_readonly_snapshot="true"
+			kernelcmdline="security=apparmor"
 		>
 			<bootloader
 				name="grub2"
@@ -33,7 +34,6 @@
 				<volume name="boot/writable"/>
 				<volume name="usr/local"/>
 				<volume name="var" copy_on_write="false"/>
-				<volume name="etc"/>
 			</systemdisk>
 		</type>
 	</preferences>
@@ -70,27 +70,21 @@
 		<source path='http://download.opensuse.org/update/tumbleweed/'/>
 	</repository>
 	<packages type="image">
-		<package name="live-add-yast-repos"/>
-		<package name="patterns-base-bootloader"/>
-		<package name="patterns-microos-basesystem"/>
-		<package name="patterns-microos-base-zypper"/>
-		<package name="patterns-microos-defaults"/>
-		<package name="patterns-microos-apparmor"/>
-		<package name="patterns-microos-desktop-common"/>
-		<package name="patterns-microos-desktop-kde"/>
-		<package name="patterns-microos-hardware"/>
+		<namedCollection name="microos_base"/>
+		<namedCollection name="microos_base_zypper"/>
+		<namedCollection name="microos_defaults"/>
+		<namedCollection name="microos_hardware"/>
+		<namedCollection name="microos_kde_desktop"/>
+		<namedCollection name="container_runtime"/>
+		<namedCollection name="bootloader"/>
+		<namedCollection name="microos_apparmor"/>
 		<package name="kernel-default"/>
 		<package name="kernel-firmware-all"/>
 		<package name="device-mapper"/>
 		<package name="cryptsetup"/>
-		<package name="growpart-generator"/>
 		<package name="parted"/>
 		<package name="dracut-kiwi-oem-dump"/>
 		<package name="dracut-kiwi-oem-repart"/>
-		<package name="NetworkManager-wwan"/>
-		<package name="NetworkManager-tui"/>
-		<package name="NetworkManager-pptp"/>
-		<package name="NetworkManager-bluetooth"/>
 	</packages>
     <packages type="bootstrap">
 		<package name="coreutils"/>
