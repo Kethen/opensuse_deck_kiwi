@@ -5,6 +5,10 @@
 		<contact>kwchuiaa@connect.ust.hk</contact>
 		<specification>openSUSE MicroOS for Steam Deck</specification>
 	</description>
+	<profiles>
+		<profile name="with-KDE" description="With KDE"/>
+		<profile name="with-GNOME" description="With GNOME"/>
+	</profiles>
 	<preferences arch="x86_64">
 		<version>0.0.1</version>
 		<packagemanager>zypper</packagemanager>
@@ -69,12 +73,18 @@
 	<repository imageinclude="true" alias="update">
 		<source path='http://download.opensuse.org/update/tumbleweed/'/>
 	</repository>
+	<packages type="image" profiles="with-KDE">
+		<namedCollection name="microos_kde_desktop"/>
+		<package name="onboard"/>
+	</packages>
+	<packages type="image" profiles="with-GNOME">
+		<namedCollection name="microos_gnome_desktop"/>
+	</packages>
 	<packages type="image">
 		<namedCollection name="microos_base"/>
 		<namedCollection name="microos_base_zypper"/>
 		<namedCollection name="microos_defaults"/>
 		<namedCollection name="microos_hardware"/>
-		<namedCollection name="microos_kde_desktop"/>
 		<namedCollection name="container_runtime"/>
 		<namedCollection name="bootloader"/>
 		<namedCollection name="microos_apparmor"/>
@@ -83,6 +93,7 @@
 		<package name="device-mapper"/>
 		<package name="cryptsetup"/>
 		<package name="parted"/>
+		<package name="firewalld"/>
 		<package name="dracut-kiwi-oem-dump"/>
 		<package name="dracut-kiwi-oem-repart"/>
 	</packages>

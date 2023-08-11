@@ -38,8 +38,11 @@ zypper -n remove --clean-deps $TEMP_PACKAGES
 zypper -n clean -a
 
 passwd -l root
-echo '%wheel  ALL=(ALL)       ALL' > /etc/sudoers.d/99_deck_pw_sudo
+# steamos update dummys sudoer file is 99
+echo '%wheel  ALL=(ALL)       ALL' > /etc/sudoers.d/98_deck_pw_sudo
 sed -iE '/^ALL   ALL=(ALL) ALL/d' /etc/sudoers
 sed -iE '/^Defaults targetpw/d' /etc/sudoers
 
 systemctl enable NetworkManager
+systemctl disable sshd
+systemctl disable firewalld
