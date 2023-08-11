@@ -81,6 +81,16 @@
 		<namedCollection name="microos_gnome_desktop"/>
 	</packages>
 	<packages type="image">
+		<package name="alsa"/>
+		<package name="alsa-oss"/>
+		<package name="alsa-oss-32bit"/>
+		<package name="alsa-plugins"/>
+		<package name="alsa-plugins-speexrate"/>
+		<package name="alsa-plugins-upmix"/>
+		<package name="alsa-ucm-conf"/>
+		<package name="alsa-utils"/>
+	</packages>
+	<packages type="image">
 		<namedCollection name="microos_base"/>
 		<namedCollection name="microos_base_zypper"/>
 		<namedCollection name="microos_defaults"/>
