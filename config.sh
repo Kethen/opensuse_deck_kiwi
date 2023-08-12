@@ -20,9 +20,9 @@ git clone --depth 1 https://github.com/Kethen/Simple-Steam-Deck-TDP-Slider.git
 cd Simple-Steam-Deck-TDP-Slider
 rpmbuild -bb deck-tdp-slider.spec
 zypper -n install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-tdp-slider-0.1-0.x86_64.rpm
-rm -rf /root/.cargo
 cd /
 rm -rf Simple-Steam-Deck-TDP-Slider
+rm -rf /root/.cargo
 
 # install input methods and some fonts for fallback
 set +e

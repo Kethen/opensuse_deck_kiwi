@@ -1,0 +1,10 @@
+[Unit]
+Description=Set X11 directory to be owned by root and with permission 1777 before gdm starts
+Before=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/bash -c 'mkdir -p /tmp/.X11-unix; chown root: /tmp/.X11-unix; chmod 1777 /tmp/.X11-unix'
+Type=oneshot
+
+[Install]
+WantedBy=graphical.target
