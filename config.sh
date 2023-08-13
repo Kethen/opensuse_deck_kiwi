@@ -26,14 +26,17 @@ rm -rf /root/.cargo
 
 # install input methods and some fonts for fallback
 set +e
-zypper -n install 'google-noto-*' 'ibus-*'
+zypper -n install 'google-noto-*' 'noto-*-fonts' 'ibus-*'
 status_code=$?
 if [ "$status_code" != "107" ] && [ "$status_code" != "0" ]
 then
-	echo zypper -n install 'google-noto-*' 'ibus-*' exited with $status_code
+	echo zypper -n install 'google-noto-*' 'noto-*-fonts' 'ibus-*' exited with $status_code
 	exit 1
 fi
 set -e
+
+# manpages
+zypper -n install man man-pages
 
 # copy screen orientation from opensuse_deck
 tar -C / -cO etc/skel/.local/share/kscreen | tar -C /home/deck -xv

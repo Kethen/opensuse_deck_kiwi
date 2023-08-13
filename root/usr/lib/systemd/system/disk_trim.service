@@ -1,0 +1,10 @@
+[Unit]
+Description=Run trim on all mounted disks
+Before=display-manager.service
+
+[Service]
+ExecStart=/usr/sbin/fstrim -av
+Type=oneshot
+
+[Install]
+WantedBy=graphical.target
