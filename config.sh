@@ -64,3 +64,11 @@ sed -i'' 's/^NUMBER_LIMIT_IMPORTANT=.*$/NUMBER_LIMIT_IMPORTANT="4-10"/g' /etc/sn
 systemctl enable NetworkManager
 systemctl disable sshd
 systemctl disable firewalld
+
+# force ibus
+echo 'export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus' >> /etc/skel/.profile
+
+cp /etc/skel/.profile /home/deck/.profile
+chown deck:deck /home/deck/.profile

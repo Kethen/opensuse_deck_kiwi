@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<image schemaversion="7.2" name="openSUSE-MicroOS-deck" displayname="openSUSE MicroOS for Steam Deck">
+<image schemaversion="7.2" name="openSUSE-MicroOS-unofficial-steamdeck" displayname="openSUSE MicroOS (Unofficial) for Steam Deck">
 	<description type="system">
 		<author>Katharine Chui</author>
 		<contact>kwchuiaa@connect.ust.hk</contact>
-		<specification>openSUSE MicroOS for Steam Deck</specification>
+		<specification>openSUSE MicroOS (Unofficial) for Steam Deck</specification>
 	</description>
 	<profiles>
 		<profile name="with-KDE" description="With KDE"/>
@@ -39,6 +39,7 @@
 				<volume name="usr/local"/>
 				<volume name="var" copy_on_write="false"/>
 			</systemdisk>
+			<size unit="G" additive="false">5</size>
 		</type>
 	</preferences>
 	<users>
@@ -75,10 +76,12 @@
 	</repository>
 	<packages type="image" profiles="with-KDE">
 		<namedCollection name="microos_kde_desktop"/>
+		<package name="pam_kwallet"/>
 		<package name="onboard"/>
 	</packages>
 	<packages type="image" profiles="with-GNOME">
 		<namedCollection name="microos_gnome_desktop"/>
+		<package name="gnome-keyring-pam"/>
 	</packages>
 	<packages type="image">
 		<package name="alsa"/>
