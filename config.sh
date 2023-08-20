@@ -6,6 +6,12 @@ test -f /.profile && . /.profile
 
 set -xe
 
+is_nvidia=false
+if [ "$kiwi_profiles" == "with-KDE-nvidia" ] || [ "$kiwi_profiles" == "with-GNOME-nvidia" ]
+then
+	is_nvidia=true
+fi
+
 TEMP_PACKAGES="git rpm-build cargo cmake gcc-c++ fontconfig-devel rpm-build"
 
 zypper -n --gpg-auto-import-keys install $TEMP_PACKAGES
@@ -16,37 +22,52 @@ git clone --depth 1 https://github.com/Kethen/opensuse_deck.git
 cd opensuse_deck
 cp rpmmacros ~/.rpmmacros
 rpmbuild -bb deck-adaptation-for-opensuse.spec
-zypper -n install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
+zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
 cd /
 rm -r opensuse_deck
 
 git clone --depth 1 https://github.com/Kethen/Simple-Steam-Deck-TDP-Slider.git
 cd Simple-Steam-Deck-TDP-Slider
 rpmbuild -bb deck-tdp-slider.spec
-zypper -n install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-tdp-slider-0.1-0.x86_64.rpm
+zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-tdp-slider-0.1-0.x86_64.rpm
 cd /
 rm -rf Simple-Steam-Deck-TDP-Slider
 rm -rf /root/.cargo
 
+zypper -n remove --clean-deps $TEMP_PACKAGES
+
 # install input methods and some fonts for fallback
 set +e
-zypper -n install 'google-noto-*' 'noto-*-fonts' 'ibus-*'
+zypper -n --gpg-auto-import-keys install 'google-noto-*' 'noto-*-fonts' 'ibus-*'
 status_code=$?
 if [ "$status_code" != "107" ] && [ "$status_code" != "0" ]
 then
-	echo zypper -n install 'google-noto-*' 'noto-*-fonts' 'ibus-*' exited with $status_code
+	echo zypper -n --gpg-auto-import-keys install 'google-noto-*' 'noto-*-fonts' 'ibus-*' exited with $status_code
 	exit 1
 fi
 set -e
 
 # manpages
-zypper -n install man man-pages
+zypper -n --gpg-auto-import-keys install man man-pages
 
 # copy screen orientation from opensuse_deck
 tar -C / -cO etc/skel/.local/share/kscreen | tar -C /home/deck -xv
 chown -R deck:deck /home/deck/.local
 
-zypper -n remove --clean-deps $TEMP_PACKAGES
+# install nvidia drivers
+if $is_nvidia
+then
+	zypper -n clean -a
+	zypper -n --gpg-auto-import-keys install --auto-agree-with-licenses nvidia-video-G06 nvidia-video-G06-32bit nvidia-gl-G06 nvidia-gl-G06-32bit nvidia-compute-G06 nvidia-compute-G06-32bit nvidia-compute-utils-G06
+
+	# mark all nvidia devices witih uaccess
+	idx=0
+	while [ $idx -lt 128 ]
+	do
+		echo "L /run/udev/static_node-tags/uaccess/nvidia${idx} - - - - /dev/nvidia${idx}" >> /usr/lib/tmpfiles.d/nvidia-logind-acl-trick-G06.conf
+		idx=$((idx + 1))
+	done
+fi
 
 zypper -n clean -a
 
@@ -70,6 +91,9 @@ baseUpdateSysConfig /etc/sysconfig/snapper SNAPPER_CONFIGS root
 systemctl enable NetworkManager
 systemctl disable sshd
 systemctl disable firewalld
+
+# disable autoupdate
+systemctl mask transactional-update.service
 
 # force ibus
 echo 'export GTK_IM_MODULE=ibus

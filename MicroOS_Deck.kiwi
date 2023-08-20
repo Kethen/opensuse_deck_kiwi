@@ -7,7 +7,9 @@
 	</description>
 	<profiles>
 		<profile name="with-KDE" description="With KDE"/>
+		<profile name="with-KDE-nvidia" description="With KDE + nvidia drivers"/>
 		<profile name="with-GNOME" description="With GNOME"/>
+		<profile name="with-GNOME-nvidia" description="With GNOME + nvidia drivers"/>
 	</profiles>
 	<preferences arch="x86_64">
 		<version>0.0.1</version>
@@ -74,12 +76,26 @@
 	<repository imageinclude="true" alias="update">
 		<source path='http://download.opensuse.org/update/tumbleweed/'/>
 	</repository>
-	<packages type="image" profiles="with-KDE">
+	<repository imageinclude="true" alias="nvidia" profiles="with-KDE-nvidia,with-GNOME-nvidia">
+		<source path='https://download.nvidia.com/opensuse/tumbleweed/'/>
+	</repository>
+	<!-- install in config.sh for easier debug
+	<packages type="image" profiles="with-KDE-nvidia,with-GNOME-nvidia">
+		<package name="nvidia-video-G06"/>
+		<package name="nvidia-video-G06-32bit"/>
+		<package name="nvidia-gl-G06"/>
+		<package name="nvidia-gl-G06-32bit"/>
+		<package name="nvidia-compute-G06"/>
+		<package name="nvidia-compute-G06-32bit"/>
+		<package name="nvidia-compute-utils-G06"/>
+	</packages>
+	-->
+	<packages type="image" profiles="with-KDE,with-KDE-nvidia">
 		<namedCollection name="microos_kde_desktop"/>
 		<package name="pam_kwallet"/>
 		<package name="onboard"/>
 	</packages>
-	<packages type="image" profiles="with-GNOME">
+	<packages type="image" profiles="with-GNOME,with-GNOME-nvidia">
 		<namedCollection name="microos_gnome_desktop"/>
 		<package name="gnome-keyring-pam"/>
 	</packages>
