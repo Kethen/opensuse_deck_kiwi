@@ -58,7 +58,7 @@ chown -R deck:deck /home/deck/.local
 if $is_nvidia
 then
 	zypper -n clean -a
-	zypper -n --gpg-auto-import-keys install --auto-agree-with-licenses nvidia-video-G06 nvidia-video-G06-32bit nvidia-gl-G06 nvidia-gl-G06-32bit nvidia-compute-G06 nvidia-compute-G06-32bit nvidia-compute-utils-G06
+	zypper -n --gpg-auto-import-keys install --auto-agree-with-licenses nvidia-video-G06 nvidia-video-G06-32bit nvidia-gl-G06 nvidia-gl-G06-32bit nvidia-compute-G06 nvidia-compute-G06-32bit nvidia-compute-utils-G06 2>/dev/null 1>/dev/null
 
 	# mark all nvidia devices witih uaccess
 	idx=0
@@ -102,3 +102,6 @@ export QT_IM_MODULE=ibus' >> /etc/skel/.profile
 
 cp /etc/skel/.profile /home/deck/.profile
 chown deck:deck /home/deck/.profile
+
+# cups access from group wheel
+sed -iE 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf

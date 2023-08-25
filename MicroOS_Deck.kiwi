@@ -125,6 +125,7 @@
 		<package name="firewalld"/>
 		<package name="dracut-kiwi-oem-dump"/>
 		<package name="dracut-kiwi-oem-repart"/>
+		<package name="sensors"/>
 	</packages>
     <packages type="bootstrap">
 		<package name="coreutils"/>
