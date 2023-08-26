@@ -64,7 +64,7 @@ then
 	idx=0
 	while [ $idx -lt 128 ]
 	do
-		echo "L /run/udev/static_node-tags/uaccess/nvidia${idx} - - - - /dev/nvidia${idx}" >> /usr/lib/tmpfiles.d/nvidia-logind-acl-trick-G06.conf
+		echo "L /run/udev/static_node-tags/uaccess/nvidia${idx} - - - - /dev/nvidia${idx}" >> /usr/lib/tmpfiles.d/nvidia-logind-acl-trick-G06-ext.conf
 		idx=$((idx + 1))
 	done
 fi
@@ -75,8 +75,8 @@ zypper -n clean -a
 passwd -l root
 # steamos update dummys sudoer file is 99
 echo '%wheel  ALL=(ALL)       ALL' > /etc/sudoers.d/98_deck_pw_sudo
-sed -iE '/^ALL   ALL=(ALL) ALL/d' /etc/sudoers
-sed -iE '/^Defaults targetpw/d' /etc/sudoers
+sed -i'' '/^ALL   ALL=(ALL) ALL/d' /etc/sudoers
+sed -i'' '/^Defaults targetpw/d' /etc/sudoers
 
 # configure snapper as https://build.opensuse.org/package/show/openSUSE:Factory/openSUSE-MicroOS would
 cp /usr/share/snapper/config-templates/default /etc/snapper/configs/root
@@ -104,4 +104,4 @@ cp /etc/skel/.profile /home/deck/.profile
 chown deck:deck /home/deck/.profile
 
 # cups access from group wheel
-sed -iE 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
+sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
