@@ -126,6 +126,12 @@
 		<package name="dracut-kiwi-oem-dump"/>
 		<package name="dracut-kiwi-oem-repart"/>
 		<package name="sensors"/>
+		<package name="atop"/>
+		<package name="iotop"/>
+		<package name="iftop"/>
+		<package name="htop"/>
+		<package name="radeontop"/>
+		<package name="earlyoom"/>
 	</packages>
     <packages type="bootstrap">
 		<package name="coreutils"/>

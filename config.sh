@@ -91,6 +91,7 @@ baseUpdateSysConfig /etc/sysconfig/snapper SNAPPER_CONFIGS root
 systemctl enable NetworkManager
 systemctl disable sshd
 systemctl disable firewalld
+systemctl enable earlyoom
 
 # disable autoupdate
 systemctl mask transactional-update.service
