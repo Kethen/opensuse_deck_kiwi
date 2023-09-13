@@ -1,0 +1,10 @@
+[Unit]
+Description=Overlay ucm2 config for the jupiter sound card
+Before=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/mount -o bind /usr/share/alsa/ucm2/conf.d/acp5x_overlay /usr/share/alsa/ucm2/conf.d/acp5x
+Type=oneshot
+
+[Install]
+WantedBy=graphical.target
