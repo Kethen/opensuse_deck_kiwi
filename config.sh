@@ -12,29 +12,48 @@ then
 	is_nvidia=true
 fi
 
+BUILD_PACKAGES=false
+
 TEMP_PACKAGES="git rpm-build cargo cmake gcc-c++ fontconfig-devel rpm-build"
 
-zypper -n --gpg-auto-import-keys install $TEMP_PACKAGES
+if $BUILD_PACKAGES
+then
+	zypper -n --gpg-auto-import-keys install $TEMP_PACKAGES
+fi
 
 # build and install some packages
-cd /
-git clone --depth 1 https://github.com/Kethen/opensuse_deck.git
-cd opensuse_deck
-cp rpmmacros ~/.rpmmacros
-rpmbuild -bb deck-adaptation-for-opensuse.spec
-zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
-cd /
-rm -r opensuse_deck
+if $BUILD_PACKAGES
+then
+	cd /
+	git clone --depth 1 https://github.com/Kethen/opensuse_deck.git
+	cd opensuse_deck
+	cp rpmmacros ~/.rpmmacros
+	rpmbuild -bb deck-adaptation-for-opensuse.spec
+	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
+	cd /
+	rm -r opensuse_deck
+else
+	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2023-09-13/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
+fi
 
-git clone --depth 1 https://github.com/Kethen/Simple-Steam-Deck-TDP-Slider.git
-cd Simple-Steam-Deck-TDP-Slider
-rpmbuild -bb deck-tdp-slider.spec
-zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-tdp-slider-0.1-0.x86_64.rpm
-cd /
-rm -rf Simple-Steam-Deck-TDP-Slider
-rm -rf /root/.cargo
+if $BUILD_PACKAGES
+then
+	git clone --depth 1 https://github.com/Kethen/Simple-Steam-Deck-TDP-Slider.git
+	cd Simple-Steam-Deck-TDP-Slider
+	rpmbuild -bb deck-tdp-slider.spec
+	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm rpmbuild/rpms/x86_64/deck-tdp-slider-0.1-0.x86_64.rpm
+	cd /
+	rm -rf Simple-Steam-Deck-TDP-Slider
+	rm -rf /root/.cargo
+else
+	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/Simple-Steam-Deck-TDP-Slider/releases/download/2023-09-13/deck-tdp-slider-0.1-0.x86_64.rpm
+fi
 
-zypper -n remove --clean-deps $TEMP_PACKAGES
+if $BUILD_PACKAGES
+then
+	zypper -n remove --clean-deps $TEMP_PACKAGES
+	zypper -n clean -a
+fi
 
 # install input methods and some fonts for fallback
 set +e
@@ -69,7 +88,6 @@ then
 	done
 fi
 
-zypper -n clean -a
 
 # disable root
 passwd -l root
@@ -106,3 +124,19 @@ chown deck:deck /home/deck/.profile
 
 # cups access from group wheel
 sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
+
+# install kernel-default
+# on modern mainline kernels, emmc would corrupt without amd_iommu=off it seems
+zypper -n --gpg-auto-import-keys install kernel-default
+
+# install steamos kernel for testing
+mkdir steamos_kernel
+cd steamos_kernel
+wget https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/linux-neptune-5.13.0.valve36-1-x86_64.pkg.tar.zst -O - | zstd -d -T0 | tar -xv
+mv usr/lib/modules/5.13.0-valve36-1-neptune /usr/lib/modules/5.13.0-valve36-1-neptune
+cp /usr/lib/modules/5.13.0-valve36-1-neptune/vmlinuz /boot/vmlinuz-5.13.0-valve36-1-neptune
+kernel-install add 5.13.0-valve36-1-neptune /usr/lib/modules/5.13.0-valve36-1-neptune/vmlinuz
+cd /
+rm -rf steamos_kernel
+
+zypper -n clean -a
