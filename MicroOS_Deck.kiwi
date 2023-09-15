@@ -24,7 +24,7 @@
 			devicepersistency="by-uuid"
 			btrfs_root_is_snapshot="true"
 			btrfs_root_is_readonly_snapshot="true"
-			kernelcmdline="security=apparmor amd_iommu=off nvme_core.default_ps_max_latency_us=0 pcie_aspm=off"
+			kernelcmdline="security=apparmor amd_iommu=off"
 		>
 			<bootloader
 				name="grub2"

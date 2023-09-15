@@ -127,15 +127,24 @@ sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
 
 # install kernel-default
 # on modern mainline kernels, emmc would corrupt without amd_iommu=off it seems
-zypper -n --gpg-auto-import-keys install kernel-default
+# actually no the emmc is just too finicky on mainline, would corrupt even with all power saving features disabled
+#zypper -n --gpg-auto-import-keys install kernel-default
 
-# install steamos kernel for testing
+# install steamos kernels
 mkdir steamos_kernel
 cd steamos_kernel
+
 wget https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/linux-neptune-5.13.0.valve36-1-x86_64.pkg.tar.zst -O - | zstd -d -T0 | tar -xv
 mv usr/lib/modules/5.13.0-valve36-1-neptune /usr/lib/modules/5.13.0-valve36-1-neptune
 cp /usr/lib/modules/5.13.0-valve36-1-neptune/vmlinuz /boot/vmlinuz-5.13.0-valve36-1-neptune
 kernel-install add 5.13.0-valve36-1-neptune /usr/lib/modules/5.13.0-valve36-1-neptune/vmlinuz
+
+# last known good kernel with the emmc
+wget https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/linux-neptune-61-6.1.43.valve1-1-x86_64.pkg.tar.zst -O - | zstd -d -T0 | tar -xv
+mv usr/lib/modules/6.1.43-valve1-1-neptune-61 /usr/lib/modules/6.1.43-valve1-1-neptune-61
+cp /usr/lib/modules/6.1.43-valve1-1-neptune-61/vmlinuz /boot/vmlinuz-6.1.43-valve1-1-neptune-61
+kernel-install add 6.1.43-valve1-1-neptune-61 /usr/lib/modules/6.1.43-valve1-1-neptune-61/vmlinuz
+
 cd /
 rm -rf steamos_kernel
 
