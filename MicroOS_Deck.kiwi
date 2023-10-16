@@ -24,7 +24,7 @@
 			devicepersistency="by-uuid"
 			btrfs_root_is_snapshot="true"
 			btrfs_root_is_readonly_snapshot="true"
-			kernelcmdline="security=apparmor amd_iommu=off"
+			kernelcmdline="security=apparmor amd_iommu=off split_lock_detect=off mitigations=off"
 		>
 			<bootloader
 				name="grub2"
