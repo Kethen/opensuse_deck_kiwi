@@ -1,0 +1,5 @@
+10.0.25
+
+install with python311-pip on opensuse, kiwi==10.0.25
+
+also needs qemu-img, gptfdisk

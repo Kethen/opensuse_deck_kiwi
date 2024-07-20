@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<image schemaversion="7.2" name="openSUSE-MicroOS-unofficial-steamdeck" displayname="openSUSE MicroOS (Unofficial) for Steam Deck">
+<image schemaversion="7.4" name="openSUSE-MicroOS-unofficial-steamdeck" displayname="openSUSE MicroOS (Unofficial) for Steam Deck">
 	<description type="system">
 		<author>Katharine Chui</author>
 		<contact>kwchuiaa@connect.ust.hk</contact>
@@ -24,7 +24,8 @@
 			devicepersistency="by-uuid"
 			btrfs_root_is_snapshot="true"
 			btrfs_root_is_readonly_snapshot="true"
-			kernelcmdline="security=apparmor amd_iommu=off split_lock_detect=off mitigations=off"
+			kernelcmdline="security=apparmor amd_iommu=off amdgpu.gttsize=8128 spi_amd.speed_dev=1 audit=0 fbcon=vc:2-6 split_lock_detect=off mitigations=off"
+			eficsm="false"
 		>
 			<bootloader
 				name="grub2"
