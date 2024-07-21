@@ -1,0 +1,5 @@
+# Nintendo Switch Left Joy-Con over bluetooth hidraw
+KERNEL=="hidraw*", KERNELS=="*057E:2006*", MODE="0660", TAG+="uaccess"
+
+# Nintendo Switch Right Joy-Con over bluetooth hidraw
+KERNEL=="hidraw*", KERNELS=="*057E:2007*", MODE="0660", TAG+="uaccess"
