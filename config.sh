@@ -70,7 +70,7 @@ set -e
 zypper -n --gpg-auto-import-keys install man man-pages
 
 # copy screen orientation from opensuse_deck
-tar -C / -cO etc/skel/.local/share/kscreen | tar -C /home/deck -xv
+tar -C /etc/skel -cO .local/share/kscreen | tar -C /home/deck -xv
 chown -R deck:deck /home/deck/.local
 
 # install nvidia drivers
