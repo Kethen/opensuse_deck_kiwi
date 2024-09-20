@@ -172,6 +172,8 @@
 		<package name="qemu-seabios"/>
 		<package name="qemu-img"/>
 		<package name="ryzenadj"/>
+		<package name="libhidapi-libusb0"/>
+		<package name="libhidapi-hidraw0"/>
 	</packages>
     <packages type="bootstrap">
 		<package name="coreutils"/>
