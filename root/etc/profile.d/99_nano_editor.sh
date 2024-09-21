@@ -1,1 +1,1 @@
-export EDITOR=nano
+export EDITOR=/usr/bin/nano
