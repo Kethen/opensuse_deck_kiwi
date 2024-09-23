@@ -24,7 +24,7 @@
 			devicepersistency="by-uuid"
 			btrfs_root_is_snapshot="true"
 			btrfs_root_is_readonly_snapshot="true"
-			kernelcmdline="security=apparmor amd_iommu=off amdgpu.gttsize=8128 spi_amd.speed_dev=1 audit=0 split_lock_detect=off mitigations=off"
+			kernelcmdline="security=apparmor amd_iommu=off amdgpu.gttsize=8128 spi_amd.speed_dev=1 audit=0 split_lock_detect=off nvme.io_queue_depth=2 mitigations=off"
 			eficsm="false"
 		>
 			<bootloader

@@ -1,0 +1,9 @@
+[Unit]
+Description="Simple zswap"
+
+[Service]
+Type=oneshot
+ExecStart=bash -c "set -xe; MEM_KB=$(cat /proc/meminfo | grep MemTotal | sed -E 's/MemTotal:\s+([0-9]+)\s+kB/\1/g'); export MEM_KB=$((MEM_KB / 2)); modprobe zram num_devices=1; DEVICE=$(zramctl -f -a zstd -s $(echo $MEM_KB)KB); mkswap $DEVICE; swapon -p 32767 $DEVICE"
+
+[Install]
+WantedBy=multi-user.target

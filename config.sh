@@ -33,7 +33,7 @@ then
 	cd /
 	rm -r opensuse_deck
 else
-	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2024-09-19/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
+	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2024-09-23/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
 fi
 
 if $BUILD_PACKAGES
@@ -128,24 +128,29 @@ sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
 # on modern mainline kernels, emmc would corrupt without amd_iommu=off it seems
 # actually no the emmc is just too finicky on mainline, would corrupt even with all power saving features disabled
 zypper -n --gpg-auto-import-keys install kernel-default
-zypper -n addlock kernel-default
-rm /boot/vmlinuz*
-rm /boot/initrd*
 
-# install steamos kernels
-mkdir steamos_kernel
-cd steamos_kernel
+if false
+then
+	zypper -n addlock kernel-default
+	rm /boot/vmlinuz*
+	rm /boot/initrd*
 
-# latest known good kernel with the emmc, and dpms on par with 5.13
-#wget "https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-3.6/os/x86_64/linux-neptune-65-6.5.0.valve5-1-x86_64.pkg.tar.zst" -O - | zstd -d -T0 | tar -xv
-wget "https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-3.6/os/x86_64/linux-neptune-61-6.1.52.valve9-1-x86_64.pkg.tar.zst" -O - | zstd -d -T0 | tar -xv
-VERSION=6.1.52-valve9-1-neptune-61
-mv usr/lib/modules/$VERSION /usr/lib/modules/$VERSION
-cp /usr/lib/modules/$VERSION/vmlinuz /boot/vmlinuz-$VERSION
-kernel-install add $VERSION /usr/lib/modules/$VERSION/vmlinuz
+	# install steamos kernels
+	mkdir steamos_kernel
+	cd steamos_kernel
 
-cd /
-rm -rf steamos_kernel
+	# latest known good kernel with the emmc, and dpms on par with 5.13
+	#wget "https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-3.6/os/x86_64/linux-neptune-65-6.5.0.valve5-1-x86_64.pkg.tar.zst" -O - | zstd -d -T0 | tar -xv
+	wget "https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-3.6/os/x86_64/linux-neptune-61-6.1.52.valve9-1-x86_64.pkg.tar.zst" -O - | zstd -d -T0 | tar -xv
+	VERSION=6.1.52-valve9-1-neptune-61
+	mv usr/lib/modules/$VERSION /usr/lib/modules/$VERSION
+	cp /usr/lib/modules/$VERSION/vmlinuz /boot/vmlinuz-$VERSION
+	kernel-install add $VERSION /usr/lib/modules/$VERSION/vmlinuz
+
+	cd /
+	rm -rf steamos_kernel
+fi
+
 
 zypper -n clean -a
 
