@@ -124,17 +124,28 @@ chown deck:deck /home/deck/.profile
 # cups access from group wheel
 sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
 
-# install kernel-default and lock it
-# on modern mainline kernels, emmc would corrupt without amd_iommu=off it seems
-# actually no the emmc is just too finicky on mainline, would corrupt even with all power saving features disabled
-zypper -n --gpg-auto-import-keys install kernel-default
+if false
+then
+	# install kernel-default
+	zypper -n --gpg-auto-import-keys install kernel-default
+fi
+
+if true
+then
+	# lock kernel-default away
+	zypper -n addlock kernel-default
+	rm -f /boot/vmlinuz*
+	rm -f /boot/initrd*
+fi
+
+if true
+then
+	# install kernel-longterm
+	zypper -n --gpg-auto-import-keys install kernel-longterm
+fi
 
 if false
 then
-	zypper -n addlock kernel-default
-	rm /boot/vmlinuz*
-	rm /boot/initrd*
-
 	# install steamos kernels
 	mkdir steamos_kernel
 	cd steamos_kernel
@@ -151,7 +162,4 @@ then
 	rm -rf steamos_kernel
 fi
 
-
 zypper -n clean -a
-
-
