@@ -33,7 +33,7 @@ then
 	cd /
 	rm -r opensuse_deck
 else
-	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2024-09-23/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
+	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2024-10-21/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
 fi
 
 if $BUILD_PACKAGES
@@ -150,10 +150,10 @@ then
 	mkdir steamos_kernel
 	cd steamos_kernel
 
-	# latest known good kernel with the emmc, and dpms on par with 5.13
-	#wget "https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-3.6/os/x86_64/linux-neptune-65-6.5.0.valve5-1-x86_64.pkg.tar.zst" -O - | zstd -d -T0 | tar -xv
-	wget "https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-3.6/os/x86_64/linux-neptune-61-6.1.52.valve9-1-x86_64.pkg.tar.zst" -O - | zstd -d -T0 | tar -xv
-	VERSION=6.1.52-valve9-1-neptune-61
+	#wget "https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-3.6/os/x86_64/linux-neptune-61-6.1.52.valve9-1-x86_64.pkg.tar.zst" -O - | zstd -d -T0 | tar -xv
+	wget "https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-3.6/os/x86_64/linux-neptune-65-6.5.0.valve21-1-x86_64.pkg.tar.zst" -O - | zstd -d -T0 | tar -xv
+	#VERSION=6.1.52-valve9-1-neptune-61
+	VERSION=6.5.0-valve21-1-neptune-65-g33487bf05ed3
 	mv usr/lib/modules/$VERSION /usr/lib/modules/$VERSION
 	cp /usr/lib/modules/$VERSION/vmlinuz /boot/vmlinuz-$VERSION
 	kernel-install add $VERSION /usr/lib/modules/$VERSION/vmlinuz
