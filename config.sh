@@ -124,6 +124,9 @@ chown deck:deck /home/deck/.profile
 # cups access from group wheel
 sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
 
+# lock firefox
+zypper -n addlock MozillaFirefox
+
 if false
 then
 	# install kernel-default
