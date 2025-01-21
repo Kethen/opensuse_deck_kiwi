@@ -101,6 +101,7 @@
 	<packages type="image" profiles="with-GNOME,with-GNOME-nvidia">
 		<namedCollection name="microos_gnome_desktop"/>
 		<package name="gnome-keyring-pam"/>
+		<package name="gnome-extensions"/>
 	</packages>
 	<packages type="image">
 		<package name="alsa"/>
