@@ -114,6 +114,25 @@
 		<package name="alsa-utils"/>
 	</packages>
 	<packages type="image">
+		<package name="libvulkan_radeon"/>
+		<package name="libvulkan_radeon-32bit"/>
+		<package name="libvulkan_intel"/>
+		<package name="libvulkan_intel-32bit"/>
+		<package name="vulkan-tools"/>
+		<package name="vulkan-tools-32bit"/>
+		<package name="Mesa"/>
+		<package name="Mesa-32bit"/>
+		<package name="Mesa-demo-x"/>
+		<package name="Mesa-demo-x-32bit"/>
+		<package name="xhost"/>
+		<package name="mangohud"/>
+		<package name="mangohud-32bit"/>
+		<package name="mozilla-openh264"/>
+		<package name="gstreamer-1.20-plugin-openh264"/>
+		<package name="xinput"/>
+		<package name="xrandr"/>
+	</packages>
+	<packages type="image">
 		<namedCollection name="microos_base"/>
 		<namedCollection name="microos_base_zypper"/>
 		<namedCollection name="microos_defaults"/>
