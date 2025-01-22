@@ -90,10 +90,6 @@ fi
 
 # disable root
 passwd -l root
-# steamos update dummys sudoer file is 99
-echo '%wheel  ALL=(ALL)       ALL' > /etc/sudoers.d/98_deck_pw_sudo
-sed -i'' '/^ALL   ALL=(ALL) ALL/d' /usr/etc/sudoers
-sed -i'' '/^Defaults targetpw/d' /usr/etc/sudoers
 
 # configure snapper as https://build.opensuse.org/package/show/openSUSE:Factory/openSUSE-MicroOS would
 cp /usr/share/snapper/config-templates/default /etc/snapper/configs/root
