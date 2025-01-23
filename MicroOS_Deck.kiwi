@@ -196,6 +196,10 @@
 		<package name="libhidapi-hidraw0"/>
 		<package name="evtest"/>
 		<package name="linuxconsoletools"/>
+		<package name="mingw64-cross-gcc-c++"/>
+		<package name="mingw32-cross-gcc-c++"/>
+		<package name="wine-staging"/>
+		<package name="wine-staging-32bit"/>
 	</packages>
     <packages type="bootstrap">
 		<package name="coreutils"/>

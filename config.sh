@@ -161,4 +161,10 @@ then
 	rm -rf steamos_kernel
 fi
 
+# default to nano
+echo 'export EDITOR=nano' >> /etc/skel/.profile
+
+cp /etc/skel/.profile /home/deck/.profile
+chown deck:deck /home/deck/.profile
+
 zypper -n clean -a
