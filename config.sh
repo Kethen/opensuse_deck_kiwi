@@ -123,13 +123,13 @@ sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
 # lock firefox
 zypper -n addlock MozillaFirefox
 
-if false
+if true
 then
 	# install kernel-default
 	zypper -n --gpg-auto-import-keys install kernel-default
 fi
 
-if true
+if false
 then
 	# lock kernel-default away
 	zypper -n addlock kernel-default
@@ -137,7 +137,7 @@ then
 	rm -f /boot/initrd*
 fi
 
-if true
+if false
 then
 	# install kernel-longterm
 	zypper -n --gpg-auto-import-keys install kernel-longterm
