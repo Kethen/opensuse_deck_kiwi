@@ -105,6 +105,7 @@ systemctl enable NetworkManager
 systemctl disable sshd
 systemctl disable firewalld
 systemctl enable earlyoom
+systemctl enable zramswap
 
 # disable autoupdate
 systemctl mask transactional-update.service

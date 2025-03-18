@@ -201,6 +201,7 @@
 		<package name="mingw32-cross-gcc-c++"/>
 		<package name="wine-staging"/>
 		<package name="wine-staging-32bit"/>
+		<package name="systemd-zram-service"/>
 	</packages>
     <packages type="bootstrap">
 		<package name="coreutils"/>
