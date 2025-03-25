@@ -140,7 +140,8 @@
 		<namedCollection name="microos_hardware"/>
 		<namedCollection name="container_runtime"/>
 		<namedCollection name="bootloader"/>
-		<namedCollection name="microos_apparmor"/>
+		<package name="apparmor-profiles"/>
+		<package name="apparmor-parser"/>
 		<!--
 		<package name="kernel-default"/>
 		-->
