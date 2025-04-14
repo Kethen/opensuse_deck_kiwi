@@ -121,8 +121,8 @@ chown deck:deck /home/deck/.profile
 # cups access from group wheel
 sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
 
-# lock firefox
-zypper -n addlock MozillaFirefox
+# lock a few recommended packages that gets pulled in during updates
+zypper -n addlock MozillaFirefox chromium libreoffice
 
 if true
 then
