@@ -33,7 +33,7 @@ then
 	cd /
 	rm -r opensuse_deck
 else
-	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2024-10-21/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
+	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2025-08-28/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
 fi
 
 if $BUILD_PACKAGES
@@ -121,10 +121,16 @@ chown deck:deck /home/deck/.profile
 # cups access from group wheel
 sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf
 
-# lock a few recommended packages that gets pulled in during updates
-zypper -n addlock MozillaFirefox chromium libreoffice
+if [ "$kiwi_profiles" == "with-KDE-nvidia" ] || [ "$kiwi_profiles" == "with-KDE" ]
+then
+	# uninstall vlc and falkon in the kde build
+	zypper -n remove vlc falkon
+fi
 
-if true
+# lock a few recommended packages that gets pulled in during updates
+zypper -n addlock MozillaFirefox chromium libreoffice vlc falkon
+
+if false
 then
 	# install kernel-default
 	zypper -n --gpg-auto-import-keys install kernel-default

@@ -24,7 +24,7 @@
 			devicepersistency="by-uuid"
 			btrfs_root_is_snapshot="true"
 			btrfs_root_is_readonly_snapshot="true"
-			kernelcmdline="security=apparmor amd_iommu=off amdgpu.gttsize=8128 spi_amd.speed_dev=1 nvme.io_queue_depth=2 audit=0 split_lock_detect=off mitigations=off nokaslr"
+			kernelcmdline="security=apparmor amd_iommu=off amdgpu.gttsize=8128 spi_amd.speed_dev=1 audit=0 split_lock_detect=off mitigations=off nokaslr"
 			eficsm="false"
 		>
 			<bootloader
@@ -42,7 +42,7 @@
 				<volume name="usr/local"/>
 				<volume name="var" copy_on_write="false"/>
 			</systemdisk>
-			<size unit="G" additive="false">5</size>
+			<size unit="G" additive="false">6</size>
 		</type>
 	</preferences>
 	<users>
@@ -71,9 +71,11 @@
 	<repository imageinclude="true" alias="non-oss">
 		<source path='http://download.opensuse.org/tumbleweed/repo/non-oss/'/>
 	</repository>
+	<!--
 	<repository imageinclude="true" alias="openh264">
 		<source path='http://codecs.opensuse.org/openh264/openSUSE_Tumbleweed'/>
 	</repository>
+	-->
 	<repository imageinclude="true" alias="update">
 		<source path='http://download.opensuse.org/update/tumbleweed/'/>
 	</repository>
@@ -92,14 +94,16 @@
 	</packages>
 	-->
 	<packages type="image" profiles="with-KDE,with-KDE-nvidia">
-		<namedCollection name="microos_kde_desktop"/>
+		<package name="patterns-kalpa-base"/>
+		<package name="sddm-qt6-branding-openSUSE"/>
+		<package name="plasma6-branding-openSUSE"/>
 		<package name="plasma6-mobile"/>
 		<package name="pam_kwallet"/>
 		<package name="maliit-keyboard"/>
 		<package name="maliit-keyboard-layouts"/>
 	</packages>
 	<packages type="image" profiles="with-GNOME,with-GNOME-nvidia">
-		<namedCollection name="microos_gnome_desktop"/>
+		<package name="patterns-aeon-base"/>
 		<package name="gnome-keyring-pam"/>
 		<package name="gnome-extensions"/>
 		<package name="lxterminal"/>
@@ -128,23 +132,27 @@
 		<package name="xhost"/>
 		<package name="mangohud"/>
 		<package name="mangohud-32bit"/>
+		<!--
 		<package name="mozilla-openh264"/>
 		<package name="gstreamer-1.20-plugin-openh264"/>
+		-->
 		<package name="xinput"/>
 		<package name="xrandr"/>
 	</packages>
 	<packages type="image">
+		<!--
 		<namedCollection name="microos_base"/>
 		<namedCollection name="microos_base_zypper"/>
 		<namedCollection name="microos_defaults"/>
+		-->
 		<namedCollection name="microos_hardware"/>
 		<namedCollection name="container_runtime"/>
 		<namedCollection name="bootloader"/>
+		<package name="btrfsprogs"/>
+		<package name="libz1"/>
 		<package name="apparmor-profiles"/>
 		<package name="apparmor-parser"/>
-		<!--
 		<package name="kernel-default"/>
-		-->
 		<package name="kernel-firmware-all"/>
 		<package name="device-mapper"/>
 		<package name="cryptsetup"/>
@@ -165,9 +173,13 @@
 	<packages type="image">
 		<package name="nano"/>
 		<package name="iftop"/>
+		<package name="iperf"/>
+		<package name="iperf2"/>
+		<package name="mtr"/>
+		<package name="git"/>
+		<package name="glances"/>
 		<package name="iotop"/>
 		<package name="glances"/>
-		<package name="htop"/>
 		<package name="unzip"/>
 		<package name="zip"/>
 		<package name="zstd"/>
@@ -179,6 +191,7 @@
 		<package name="binwalk"/>
 		<package name="sshfs"/>
 		<package name="tmux"/>
+		<package name="qemu"/>
 		<package name="qemu-x86"/>
 		<package name="qemu-ui-opengl"/>
 		<package name="qemu-ui-spice-core"/>
