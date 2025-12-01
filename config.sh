@@ -33,7 +33,7 @@ then
 	cd /
 	rm -r opensuse_deck
 else
-	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2025-08-28/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
+	zypper -n --gpg-auto-import-keys install --allow-unsigned-rpm https://github.com/Kethen/opensuse_deck/releases/download/2025-12-01/deck-adaptation-for-opensuse-0.1-0.x86_64.rpm
 fi
 
 if $BUILD_PACKAGES
