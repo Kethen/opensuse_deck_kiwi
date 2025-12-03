@@ -101,6 +101,7 @@
 		<package name="pam_kwallet"/>
 		<package name="maliit-keyboard"/>
 		<package name="maliit-keyboard-layouts"/>
+		<package name="maliit-keyboard-lang"/>
 	</packages>
 	<packages type="image" profiles="with-GNOME,with-GNOME-nvidia">
 		<package name="patterns-aeon-base"/>

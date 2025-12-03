@@ -111,12 +111,12 @@ systemctl enable zramswap
 systemctl mask transactional-update.service
 
 # force ibus
-echo 'export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus' >> /etc/skel/.profile
+#echo 'export GTK_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
+#export QT_IM_MODULE=ibus' >> /etc/skel/.profile
 
-cp /etc/skel/.profile /home/deck/.profile
-chown deck:deck /home/deck/.profile
+#cp /etc/skel/.profile /home/deck/.profile
+#chown deck:deck /home/deck/.profile
 
 # cups access from group wheel
 sed -i'' 's/^SystemGroup root/SystemGroup wheel/' /etc/cups/cups-files.conf

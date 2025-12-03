@@ -4,7 +4,8 @@ set -ex
 rm -rf image_out
 
 #BUILD_TARGETS="with-KDE with-GNOME with-KDE-nvidia with-GNOME-nvidia"
-BUILD_TARGETS="with-KDE with-GNOME"
+#BUILD_TARGETS="with-KDE with-GNOME"
+BUILD_TARGETS="with-KDE"
 
 for profile in $BUILD_TARGETS
 do
