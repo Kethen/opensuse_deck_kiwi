@@ -174,4 +174,8 @@ echo 'export EDITOR=nano' >> /etc/skel/.profile
 cp /etc/skel/.profile /home/deck/.profile
 chown deck:deck /home/deck/.profile
 
+# install codecs
+zypper -n addrepo -cfp 90 'https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/' packman
+zypper --gpg-auto-import-keys -n install --allow-vendor-change --from packman ffmpeg gstreamer-plugins-{good,bad,ugly,libav} libavcodec vlc-codecs Mesa-libva
+
 zypper -n clean -a

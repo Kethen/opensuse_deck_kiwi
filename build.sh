@@ -20,7 +20,7 @@ do
 	mount -t tmpfs -o size=9G, tmpfs tmp_mnt
 
 
-	if ! kiwi-ng --debug --profile=$profile system prepare --description=./ --root=./tmp_mnt/kiwi_root_dir
+	if ! python3 /usr/bin/kiwi-ng --debug --profile=$profile system prepare --description=./ --root=./tmp_mnt/kiwi_root_dir
 	then
 		echo prepare failed, copying out root_dir for inspection
 		rm -rf root_dir_debug
@@ -29,7 +29,7 @@ do
 		exit 1
 	fi
 
-	kiwi-ng --profile=$profile system create --root=./tmp_mnt/kiwi_root_dir --target-dir=./image_out/$profile/
+	python3 /usr/bin/kiwi-ng --profile=$profile system create --root=./tmp_mnt/kiwi_root_dir --target-dir=./image_out/$profile/
 	umount tmp_mnt
 done
 '
