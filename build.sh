@@ -18,7 +18,7 @@ do
 	rm -rf tmp_mnt
 	mkdir -p tmp_mnt
 
-	mount -t tmpfs -o size=9G, tmpfs tmp_mnt
+	mount -t tmpfs -o size=10G, tmpfs tmp_mnt
 
 
 	if ! python3 /usr/bin/kiwi-ng --debug --profile=$profile system prepare --description=./ --root=./tmp_mnt/kiwi_root_dir

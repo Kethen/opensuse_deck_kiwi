@@ -99,6 +99,7 @@
 		<package name="plasma6-branding-openSUSE"/>
 		<package name="plasma6-mobile"/>
 		<package name="pam_kwallet"/>
+		<package name="korganizer"/>
 		<package name="maliit-keyboard"/>
 		<package name="maliit-keyboard-layouts"/>
 		<package name="maliit-keyboard-lang"/>
